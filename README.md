@@ -16,4 +16,5 @@ npm run dev
 
 
 ## Screenshots
-https://i.ibb.co/xgWX1kc/ecommerce.png
+![ecommerce](https://github.com/deevesh11nov/E-Commerce-App/assets/127090783/0c723e25-ad9a-4dd5-a1e6-6d9cb98c7034)
+
