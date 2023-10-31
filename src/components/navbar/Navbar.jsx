@@ -115,7 +115,15 @@ function Navbar() {
                       </a>
                     </div>
                   ) : (
-                    ""
+                    <div className="flow-root">
+                      <a
+                        onClick={login}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Login
+                      </a>
+                    </div>
                   )}
 
                   <div className="flow-root">
