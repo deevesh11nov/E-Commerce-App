@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import myContext from "../../context/data/myContext";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { addToCart } from "../../redux/cartSlice";
+import { toast } from "react-toastify";
 
 function ProductCard() {
   const context = useContext(myContext);
@@ -22,8 +22,9 @@ function ProductCard() {
 
   const addCart = (product) => {
     dispatch(addToCart(product));
-    toast.success("Successfully added to cart");
+    toast.success("Added to cart");
   };
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -44,14 +45,12 @@ function ProductCard() {
           {product
             .filter((obj) => obj.title.toLowerCase().includes(searchkey))
             .filter((obj) => obj.category.toLowerCase().includes(filterType))
+            .filter((obj) => obj.price.includes(filterPrice))
+            .slice(0, 8)
             .map((item, index) => {
-              const { title, price, imageUrl, id } = item;
+              const { title, price, description, imageUrl, id } = item;
               return (
-                <div
-                  key={index}
-                  onClick={() => (window.location.href = `/productinfo/${id}`)}
-                  className="p-4 md:w-1/4  drop-shadow-lg "
-                >
+                <div key={index} className="p-4 md:w-1/4  drop-shadow-lg ">
                   <div
                     className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
                     style={{
@@ -59,7 +58,12 @@ function ProductCard() {
                       color: mode === "dark" ? "white" : "",
                     }}
                   >
-                    <div className="flex justify-center cursor-pointer">
+                    <div
+                      onClick={() =>
+                        (window.location.href = `/productinfo/${id}`)
+                      }
+                      className="flex justify-center cursor-pointer"
+                    >
                       <img
                         className=" rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out"
                         src={imageUrl}
@@ -84,7 +88,7 @@ function ProductCard() {
                         className="leading-relaxed mb-3"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
-                        Rs.{price}
+                        ₹{price}
                       </p>
                       <div className=" flex justify-center">
                         <button
